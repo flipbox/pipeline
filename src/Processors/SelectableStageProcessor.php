@@ -24,6 +24,13 @@ class SelectableStageProcessor implements ProcessorInterface
     public $keys = [];
 
     /**
+     * If keys are empty, proceed processing all stages.
+     *
+     * @var bool
+     */
+    public $processOnEmpty = false;
+
+    /**
      * If a stage key is numeric, it's considered anonymous.  If true, anonymous stages will automatically
      * be included in the process.
      *
@@ -63,8 +70,8 @@ class SelectableStageProcessor implements ProcessorInterface
      */
     private function isStageSelectable($key)
     {
-        if (empty($this->keys)) {
-            return false;
+        if (empty($this->keys) && $this->processOnEmpty === true) {
+            return true;
         }
 
         if (is_int($key) && $this->autoSelect === true) {
