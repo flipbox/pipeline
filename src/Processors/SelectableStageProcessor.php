@@ -8,15 +8,13 @@
 
 namespace Flipbox\Pipeline\Processors;
 
-use League\Pipeline\ProcessorInterface;
-
 /**
- * A base pipeline built for extensibility
+ * A base pipeline which allows processing of specific stage keys.
  *
  * @author Flipbox Digital <hello@flipboxdigital.com>
  * @since 1.0.0
  */
-class SelectableStageProcessor implements ProcessorInterface
+class SelectableStageProcessor extends Processor
 {
     /**
      * @var array
@@ -50,14 +48,15 @@ class SelectableStageProcessor implements ProcessorInterface
     /**
      * @param array $stages
      * @param mixed $payload
+     * @param mixed $source
      *
      * @return mixed
      */
-    public function process(array $stages, $payload)
+    protected function processStages(array $stages, $payload, $source)
     {
         foreach ($stages as $key => $stage) {
             if ($this->isStageSelectable($key)) {
-                $payload = call_user_func($stage, $payload);
+                $payload = $this->processStage($stage, $payload, $source);
             }
         }
 
@@ -68,7 +67,7 @@ class SelectableStageProcessor implements ProcessorInterface
      * @param $key
      * @return bool
      */
-    private function isStageSelectable($key)
+    protected function isStageSelectable($key)
     {
         if (empty($this->keys) && $this->processOnEmpty === true) {
             return true;
@@ -78,6 +77,29 @@ class SelectableStageProcessor implements ProcessorInterface
             return true;
         }
 
+        return $this->stageMatches($key) || $this->stageBeginsWith($key);
+    }
+
+    /**
+     * @param $key
+     * @return bool
+     */
+    protected function stageBeginsWith($key): bool
+    {
+        foreach($this->keys as $needle) {
+            if(0 === strpos($key, $needle . ':')) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * @param $key
+     * @return bool
+     */
+    protected function stageMatches($key): bool
+    {
         return in_array($key, (array)$this->keys, true);
     }
 }

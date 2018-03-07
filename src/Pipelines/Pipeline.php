@@ -8,10 +8,10 @@
 
 namespace Flipbox\Pipeline\Pipelines;
 
+use Flipbox\Pipeline\Processors\Processor;
 use Flipbox\Skeleton\Helpers\ArrayHelper;
 use Flipbox\Skeleton\Helpers\ObjectHelper;
 use Flipbox\Skeleton\Object\AbstractObject;
-use League\Pipeline\FingersCrossedProcessor;
 use League\Pipeline\PipelineInterface;
 use League\Pipeline\ProcessorInterface;
 use League\Pipeline\StageInterface;
@@ -33,7 +33,7 @@ class Pipeline extends AbstractObject implements PipelineInterface
     /**
      * @var ProcessorInterface|null
      */
-    protected $processor = FingersCrossedProcessor::class;
+    protected $processor = Processor::class;
 
     /**
      * @inheritdoc
@@ -143,19 +143,20 @@ class Pipeline extends AbstractObject implements PipelineInterface
 
     /**
      * @param $payload
+     * @param mixed|null $source
      * @return mixed
      * @throws InvalidArgumentException
      */
-    public function process($payload)
+    public function process($payload, $source = null)
     {
-        return $this->getProcessor()->process($this->getStages(), $payload);
+        return $this->getProcessor()->process($this->getStages(), $payload, $source);
     }
 
     /**
      * @inheritdoc
      */
-    public function __invoke($payload)
+    public function __invoke($payload, $source = null)
     {
-        return $this->process($payload);
+        return $this->process($payload, $source);
     }
 }
