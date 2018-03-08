@@ -142,12 +142,12 @@ class Pipeline extends AbstractObject implements PipelineInterface
     }
 
     /**
-     * @param $payload
+     * @param mixed|null $payload
      * @param mixed|null $source
      * @return mixed
      * @throws InvalidArgumentException
      */
-    public function process($payload, $source = null)
+    public function process($payload = null, $source = null)
     {
         return $this->getProcessor()->process($this->getStages(), $payload, $source);
     }
@@ -155,7 +155,7 @@ class Pipeline extends AbstractObject implements PipelineInterface
     /**
      * @inheritdoc
      */
-    public function __invoke($payload, $source = null)
+    public function __invoke($payload = null, $source = null)
     {
         return $this->process($payload, $source);
     }
