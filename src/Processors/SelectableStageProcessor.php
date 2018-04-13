@@ -86,8 +86,8 @@ class SelectableStageProcessor extends Processor
      */
     protected function stageBeginsWith($key): bool
     {
-        foreach($this->keys as $needle) {
-            if(0 === strpos($key, $needle . ':')) {
+        foreach ($this->keys as $needle) {
+            if (0 === strpos($key, $needle . ':')) {
                 return true;
             }
         }
