@@ -48,15 +48,15 @@ class SelectableStageProcessor extends Processor
     /**
      * @param array $stages
      * @param mixed $payload
-     * @param mixed $source
+     * @param array $extra
      *
      * @return mixed
      */
-    protected function processStages(array $stages, $payload, $source)
+    protected function processStages(array $stages, $payload, array $extra = [])
     {
         foreach ($stages as $key => $stage) {
             if ($this->isStageSelectable($key)) {
-                $payload = $this->processStage($stage, $payload, $source);
+                $payload = $this->processStage($stage, $payload, $extra);
             }
         }
 

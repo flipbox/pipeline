@@ -142,21 +142,25 @@ class Pipeline extends AbstractObject implements PipelineInterface
     }
 
     /**
-     * @param mixed|null $payload
-     * @param mixed|null $source
+     * @param mixed $payload
+     * @param array $extra
      * @return mixed
      * @throws InvalidArgumentException
      */
-    public function process($payload = null, $source = null)
+    public function process($payload, $extra = [])
     {
-        return $this->getProcessor()->process($this->getStages(), $payload, $source);
+        if (!empty($extra) && !is_array($extra)) {
+            $extra = ['source' => $extra];
+        }
+
+        return $this->getProcessor()->process($this->getStages(), $payload, $extra);
     }
 
     /**
      * @inheritdoc
      */
-    public function __invoke($payload = null, $source = null)
+    public function __invoke($payload, $extra = [])
     {
-        return $this->process($payload, $source);
+        return $this->process($payload, $extra);
     }
 }

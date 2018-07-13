@@ -21,26 +21,30 @@ class Processor implements ProcessorInterface
     /**
      * @param array $stages
      * @param mixed $payload
-     * @param mixed|null $source
+     * @param array $extra
      *
      * @return mixed
      */
-    public function process(array $stages, $payload, $source = null)
+    public function process(array $stages, $payload, $extra = [])
     {
-        return $this->processStages($stages, $payload, $source ?: $payload);
+        if (!empty($extra) && !is_array($extra)) {
+            $extra = ['source' => $extra];
+        }
+
+        return $this->processStages($stages, $payload, $extra);
     }
 
     /**
      * @param array $stages
      * @param mixed $payload
-     * @param mixed $source
+     * @param array $extra
      *
      * @return mixed
      */
-    protected function processStages(array $stages, $payload, $source)
+    protected function processStages(array $stages, $payload, array $extra = [])
     {
         foreach ($stages as $stage) {
-            $payload = $this->processStage($stage, $payload, $source);
+            $payload = $this->processStage($stage, $payload, $extra);
         }
 
         return $payload;
@@ -49,11 +53,11 @@ class Processor implements ProcessorInterface
     /**
      * @param callable $stage
      * @param mixed $payload
-     * @param mixed|null $source
+     * @param array $extra
      * @return mixed
      */
-    protected function processStage(callable $stage, $payload, $source = null)
+    protected function processStage(callable $stage, $payload, array $extra = [])
     {
-        return call_user_func_array($stage, [$payload, $source]);
+        return call_user_func_array($stage, array_merge([$payload], $extra));
     }
 }
