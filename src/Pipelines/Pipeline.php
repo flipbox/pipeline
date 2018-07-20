@@ -149,7 +149,7 @@ class Pipeline extends AbstractObject implements PipelineInterface
      */
     public function process($payload, $extra = [])
     {
-        if (!empty($extra) && !is_array($extra)) {
+        if (!is_array($extra)) {
             $extra = ['source' => $extra];
         }
 

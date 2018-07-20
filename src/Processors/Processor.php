@@ -27,7 +27,7 @@ class Processor implements ProcessorInterface
      */
     public function process(array $stages, $payload, $extra = [])
     {
-        if (!empty($extra) && !is_array($extra)) {
+        if (!is_array($extra)) {
             $extra = ['source' => $extra];
         }
 
