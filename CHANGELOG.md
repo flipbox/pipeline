@@ -1,6 +1,10 @@
 # Changelog
 All Notable changes to `flipboxdigital\pipeline` will be documented in this file
 
+## 1.2.0 - 12-03-18
+### Changed
+- Change namespaces to lowercase
+
 ## 1.1.1 - 07-20-18
 ### Fixed
 - Enforce array of `$extra` params

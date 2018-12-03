@@ -6,7 +6,7 @@
  * @link       https://github.com/flipbox/pipeline
  */
 
-namespace Flipbox\Pipeline\Processors;
+namespace flipbox\pipeline\processors;
 
 /**
  * A base pipeline which allows processing of specific stage keys.

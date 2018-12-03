@@ -6,9 +6,9 @@
  * @link       https://github.com/flipbox/pipeline
  */
 
-namespace Flipbox\Pipeline\Builders;
+namespace flipbox\pipeline\builders;
 
-use Flipbox\Pipeline\Pipelines\Pipeline;
+use flipbox\pipeline\pipelines\pipeline;
 use Flipbox\Skeleton\Logger\AutoLoggerTrait;
 use League\Pipeline\PipelineInterface;
 use League\Pipeline\ProcessorInterface;

@@ -6,9 +6,9 @@
  * @link       https://github.com/flipbox/pipeline
  */
 
-namespace Flipbox\Pipeline\Pipelines;
+namespace flipbox\pipeline\pipelines;
 
-use Flipbox\Pipeline\Processors\Processor;
+use flipbox\pipeline\processors\processor;
 use Flipbox\Skeleton\Helpers\ArrayHelper;
 use Flipbox\Skeleton\Helpers\ObjectHelper;
 use Flipbox\Skeleton\Object\AbstractObject;

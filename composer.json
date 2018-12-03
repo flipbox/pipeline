@@ -1,7 +1,7 @@
 {
   "name": "flipboxdigital/pipeline",
   "description": "Pipeline",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "keywords": [
     "pipeline",
     "flipbox"
@@ -23,12 +23,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Flipbox\\Pipeline\\": "src/"
+      "flipbox\\pipeline\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Flipbox\\Pipeline\\Tests\\": "tests/src/"
+      "flipbox\\pipeline\\tests\\": "tests/src/"
     }
   },
   "extra": {

@@ -6,7 +6,7 @@
  * @link       https://github.com/flipbox/pipeline
  */
 
-namespace Flipbox\Pipeline\Pipelines;
+namespace flipbox\pipeline\pipelines;
 
 /**
  * Supports the ability to define a pipe with an associated key.  This allows pipes to be overwritten and
